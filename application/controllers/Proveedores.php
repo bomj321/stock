@@ -61,9 +61,8 @@ class Proveedores extends CI_Controller {
 				'proveedor'   => $this->Proveedores_model->seleccionar_proveedor($id_proveedor), 
 			);
 
+		$this->load->view("proveedores/respuesta_modal_editar.php",$data);
 
-
-		echo json_encode($data);
 	}	
 
 	public function editar()
@@ -98,4 +97,27 @@ class Proveedores extends CI_Controller {
 			$this->Proveedores_model->actualizar_proveedor($id_proveedor,$data);	
 			
 	}
+
+		public function vista_eliminar($id_proveedor)
+	{
+		$data  = array(
+				'proveedor'   => $this->Proveedores_model->seleccionar_proveedor($id_proveedor), 
+			);
+
+		$this->load->view("proveedores/respuesta_modal_eliminar.php",$data);
+		
+	}
+
+	public function eliminar()
+	{
+			$id_proveedor            = $this->input->post("id_proveedor");
+
+			$data = array
+					(
+						'estado'                 => '0',									
+					);	
+			$this->Proveedores_model->actualizar_proveedor($id_proveedor,$data);	
+			
+	}	
+
 }

@@ -48,9 +48,7 @@ class Clientes extends CI_Controller {
 				'cliente'   => $this->Usuarios_model->seleccionar_cliente($id_cliente), 
 			);
 
-
-
-		echo json_encode($data);
+		$this->load->view("clientes/respuesta_modal_editar.php",$data);
 	}	
 
 	public function editar()
@@ -74,6 +72,29 @@ class Clientes extends CI_Controller {
 			$this->Usuarios_model->actualizar_cliente($id_cliente,$data);	
 			
 	}
+
+	public function vista_eliminar($id_cliente)
+	{
+		$data  = array(
+				'cliente'   => $this->Usuarios_model->seleccionar_cliente($id_cliente), 
+			);
+
+		$this->load->view("clientes/respuesta_modal_eliminar.php",$data);
+		
+	}
+
+
+	public function eliminar()
+	{
+			$id_cliente           = $this->input->post("id_cliente"); 
+
+			$data = array
+					(
+						'estado'                 => '0',									
+					);	
+			$this->Usuarios_model->actualizar_cliente($id_cliente,$data);	
+			
+	}	
 
 
 

@@ -17,9 +17,9 @@ class Usuarios_model extends CI_Model {
 	}
 /*SECCION DEL LOGIN*/
 
-/*SECCION DEL LOGIN*/
 
-	public function listado()
+/*SECCION DE LOS CLIENTES*/
+public function listado()
 	{
 		$this->db->where("estado",'1');
 		$this->db->where("nombre_cliente !=",'Administrador');
@@ -27,10 +27,7 @@ class Usuarios_model extends CI_Model {
 		return $resultados->result();
 	}
 
-
-/*SECCION DEL LOGIN*/	
-
-/*SECCION DE LOS CLIENTES*/
+	
 public function agregar_cliente($data){
 	return $this->db->insert("clientes",$data);
 }

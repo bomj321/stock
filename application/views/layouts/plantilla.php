@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="images/favicon.ico" type="image/ico" />
 
-    <title>Sistema de Gesti&oacute; de Pagos</title>
+    <title>Sistema de Gesti&oacute;n de Pagos</title>
 
     <!-- Bootstr<?php echo base_url();?>-->
     <link href="<?php echo base_url();?>public/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -102,7 +102,7 @@
                   <li><a><i class="fa fa-users"></i>Vendedores<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      <!-- <li><a href="<?php echo base_url();?>mercadob/list">Billetes</a></li>-->
-                     <li><a href="<?php echo base_url();?>vendedores/menu">Control de Vendedores</a></li>
+                     <li><a href="<?php echo base_url();?>vendedores/listado">Control de Vendedores</a></li>
                     </ul>
                   </li>
 

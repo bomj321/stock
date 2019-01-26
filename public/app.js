@@ -232,7 +232,7 @@ $(".boton_editar_clientes").click(function(){
 
               },
                success:function(resp){                               
-                $("#modal_editar .modal-body").html(resp.cliente);
+                $("#modal_editar .modal-body").html(resp);
 
             },
             error:function(){
@@ -279,6 +279,61 @@ $("#formulario_editar_clientes").submit(function(e){
 
     return false;
   });
+
+$(".boton_eliminar_clientes").click(function(){
+    var id_cliente =   $(this).val();
+   $.ajax({
+            url: base_url + "clientes/vista_eliminar/" + id_cliente,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+
+              },
+               success:function(resp){                               
+                $("#modal_eliminar .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
+
+$("#formulario_eliminar_clientes").submit(function(e){
+    e.preventDefault();
+
+    var cliente = {
+      id_cliente:        $('input[name="id_cliente"]').val(),     
+    };  
+
+   $.ajax({
+            url: base_url + "clientes/eliminar",
+            type:"POST",
+            data: cliente,
+            beforeSend: function() {
+                     toastr.warning('Eliminando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){                
+                toastr.success('El cliente ha sido Eliminado', 'Cliente Eliminado');                
+                $('#modal_editar').modal('hide');
+               setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+
 
 
 /*SECCION DE CLIENTES*/
@@ -342,7 +397,7 @@ $(".boton_editar_proveedores").click(function(){
 
               },
                success:function(resp){                               
-                $("#modal_editar .modal-body").html(resp.proveedor);
+                $("#modal_editar .modal-body").html(resp);
 
             },
             error:function(){
@@ -397,12 +452,167 @@ $("#formulario_editar_proveedores").submit(function(e){
     return false;
   });
 
+$(".boton_eliminar_proveedores").click(function(){
+    var id_proveedor =   $(this).val();
+   $.ajax({
+            url: base_url + "proveedores/vista_eliminar/" + id_proveedor,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+
+              },
+               success:function(resp){                               
+                $("#modal_eliminar .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
+
+$("#formulario_eliminar_proveedores").submit(function(e){
+    e.preventDefault();
+
+     var proveedor = {
+      id_proveedor:                $('input[name="id_proveedor"]').val(),   
+    };  
+
+   $.ajax({
+            url: base_url + "proveedores/eliminar",
+            type:"POST",
+            data: proveedor,
+            beforeSend: function() {
+                     toastr.warning('Eliminando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){                
+                toastr.success('El proveedor ha sido Eliminado', 'Proveedor Eliminado');                
+                $('#modal_editar').modal('hide');
+               setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+
+
+
 
 /*SECCION PROVEEDORES*/
 
 
+/*SECCION VENDEDORES*/
+
+$("#formulario_agregar_vendedores").submit(function(e){
+    e.preventDefault();
+
+    var vendedor = {
+      nombre_vendedor:    $('input[name="nombre_vendedor"]').val(),
+      dni_vendedor:       $('input[name="dni_vendedor"]').val(),
+      correo_vendedor:    $('input[name="correo_vendedor"]').val(),
+     
+
+    };  
+
+   $.ajax({
+            url: base_url + "vendedores/registrar",
+            type:"POST",
+            data: vendedor,
+            beforeSend: function() {
+                     toastr.warning('Registrando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){                
+                toastr.success('El vendedor ha sido Registrado', 'Vendedor Registrado');
+
+                $('#modal_agregar').modal('hide');
+
+                setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
 
 
+$(".boton_editar_vendedores").click(function(){
+    var id_vendedor =   $(this).val();
+   $.ajax({
+            url: base_url + "vendedores/vista_edicion/" + id_vendedor,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+
+              },
+               success:function(resp){                               
+                $("#modal_editar .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
+
+$("#formulario_editar_vendedores").submit(function(e){
+    e.preventDefault();
+
+    var vendedor = {
+      id_vendedor:        $('input[name="id_vendedor"]').val(),
+      nombre_vendedor:    $('input[name="nombre_vendedor_editar"]').val(),
+      dni_vendedor:       $('input[name="dni_vendedor_editar"]').val(),
+      correo_vendedor:    $('input[name="correo_vendedor_editar"]').val(),
+    };  
+
+   $.ajax({
+            url: base_url + "vendedores/editar",
+            type:"POST",
+            data: vendedor,
+            beforeSend: function() {
+                     toastr.warning('Actualizando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){                
+                toastr.success('El vendedor ha sido Actualizado', 'Proveedor Actualizado');                
+                $('#modal_editar').modal('hide');
+                
+               setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+
+
+/*SECCION VENDEDORES*/
 
 
 
