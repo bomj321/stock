@@ -41,7 +41,7 @@
     <!--FUENTES DE LETRAS-->
     <link href="https://fonts.googleapis.com/css?family=Gugi|Mogra" rel="stylesheet">
     <!--FUENTES DE LETRAS-->
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="<?php echo base_url();?>public/app.css" rel="stylesheet">
 
 
@@ -59,7 +59,7 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="<?php echo base_url(); ?>dashboard" class="site_title"><i class="fa fa-euro"></i><span>Gest&oacute; Ventas</span></a>
+              <a href="<?php echo base_url(); ?>dashboard" class="site_title"><i class="fa fa-euro"></i><span>Gesti&oacute;n Ventas</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -83,52 +83,49 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                        <li><a><i class="fa fa-tags"></i> Ropa <span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li><a href="<?php echo base_url();?>ropa/list/">Control de Prendas</a></li>
-                          </ul>
-                        </li>
-                    <li><a><i class="fa fa-user"></i> Usuarios<span class="fa fa-chevron-down"></span></a>
+                        
+                    <li><a><i class="fa fa-user"></i>Clientes<span class="fa fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                           <!--<li><a href="<?php echo base_url();?>billetes/list">Billetes</a></li>-->
-                        <li><a href="<?php echo base_url();?>usuario/list">Control de Usuario</a></li>
+                        <li><a href="<?php echo base_url();?>clientes/listado">Control de Clientes</a></li>
                       </ul>
                     </li>
 
-                   <li><a><i class="fa fa-envelope"></i> Email<span class="fa fa-chevron-down"></span></a>
+                   <li><a><i class="fa fa-truck"></i>Proveedores<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                        <!--<li><a href="<?php echo base_url();?>collectionb/list">Colecci&oacute;n de Billetes</a></li>-->
-                      <li><a href="<?php echo base_url();?>email/list">Control de Emails</a></li>
+                      <li><a href="<?php echo base_url();?>proveedores/list">Control de Proveedores</a></li>
                     </ul>
                   </li>
 
 
-                  <li><a><i class="fa fa-list-alt"></i> Menus <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-users"></i>Vendedores<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                      <!-- <li><a href="<?php echo base_url();?>mercadob/list">Billetes</a></li>-->
-                     <li><a href="<?php echo base_url();?>menu/menu">Control de Menus</a></li>
-                      <li><a href="<?php echo base_url();?>menu/submenu">Control de SubMenus</a></li>
+                     <li><a href="<?php echo base_url();?>vendedores/menu">Control de Vendedores</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-money"></i> Pagos <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-gift"></i>Productos <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url();?>pago/list">Listado de Pagos</a></li>
+                      <li><a href="<?php echo base_url();?>productos/list_products">Listado de Productos</a></li>
                     </ul>
                   </li>
 
-                  <li><a><i class="fa fa-line-chart"></i> M&aacute;s vendidos <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-money"></i> Ventas <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url();?>pago/list_products">Listado de Productos</a></li>
+                      <li><a href="<?php echo base_url();?>ventas/list">Ventas de Contado</a></li>
+                      <li><a href="<?php echo base_url();?>ventas/list">Ventas a Credito</a></li>
                     </ul>
-                  </li>
+                  </li>  
 
-                  <li><a><i class="fa fa-cogs"></i> Configuraci&oacute;n <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-line-chart"></i>Estadisticas <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url();?>usuario/configuracion">Configurar Front-end</a></li>
+                      <li><a href="<?php echo base_url();?>estadisticas/list_products">Estadisticas de Contado</a></li>
+                      <li><a href="<?php echo base_url();?>estadisticas/list_products">Estadisticas a Credito</a></li>
+
                     </ul>
                   </li>
-
 
                 </ul>
               </div>
@@ -251,6 +248,8 @@
     <!--GRAFICAS-->
 
     <!--Scripts Personalizados-->
+     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
      <script src="<?php echo base_url();?>public/app.js"></script>
 
 

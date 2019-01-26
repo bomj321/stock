@@ -1,6 +1,11 @@
 $(document).ready(function () {
 
-       $("#ropa").DataTable({
+  /*PLUGIN DE VALIDACION*/
+  $.validate({
+    lang: 'es'
+  });
+  /*PLUGIN DE VALIDACION*/
+       $("#clientes").DataTable({
          language: {
             "sProcessing":     "Procesando...",
             "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -28,7 +33,7 @@ $(document).ready(function () {
     "aaSorting": [[ 0, "asc" ]]
         });
 
-       $("#tipo").DataTable({
+       $("#proveedores").DataTable({
           language: {
              "sProcessing":     "Procesando...",
              "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -56,7 +61,7 @@ $(document).ready(function () {
      "aaSorting": [[ 0, "asc" ]]
          });
 
-         $("#subtipo").DataTable({
+         $("#vendedores").DataTable({
             language: {
                "sProcessing":     "Procesando...",
                "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -85,7 +90,7 @@ $(document).ready(function () {
            });
 
 
-           $("#listado_usuario").DataTable({
+           $("#productos").DataTable({
               language: {
                  "sProcessing":     "Procesando...",
                  "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -113,7 +118,7 @@ $(document).ready(function () {
          "aaSorting": [[ 0, "asc" ]]
              });
 
-           $("#listado_productos_vendidos").DataTable({
+           $("#ventas_contado").DataTable({
               language: {
                  "sProcessing":     "Procesando...",
                  "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -143,7 +148,7 @@ $(document).ready(function () {
              
               
 
-         $("#email").DataTable({
+         $("#ventas_debito").DataTable({
             language: {
                "sProcessing":     "Procesando...",
                "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -174,7 +179,150 @@ $(document).ready(function () {
 })
 
 /**************CODIGO PARA EL GIF DE CARGA DE LOS CORREOS****************/
-var base_url= 'http://localhost/ecommerce/';
+var base_url= 'http://localhost/stock/';
+
+/*SECCION DE CLIENTES*/
+$("#formulario_agregar_clientes").submit(function(e){
+    e.preventDefault();
+
+    var cliente = {
+      nombre_cliente:    $('input[name="nombre_cliente"]').val(),
+      dni_cliente:       $('input[name="dni_cliente"]').val(),
+      direccion_cliente: $('textarea[name="direccion_cliente"]').val(),
+      correo_cliente:    $('input[name="correo_cliente"]').val(),
+      codigo_cliente:    $('input[name="codigo_cliente"]').val()
+    };  
+
+   $.ajax({
+            url: base_url + "clientes/registrar",
+            type:"POST",
+            data: cliente,
+            beforeSend: function() {
+                     toastr.warning('Registrando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){                
+                toastr.success('El cliente ha sido Registrado', 'Cliente Registrado');
+
+                $('#modal_agregar').modal('hide');
+
+                setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+
+
+$(".boton_editar_clientes").click(function(){
+    var id_cliente =   $(this).val();
+   $.ajax({
+            url: base_url + "clientes/vista_edicion/" + id_cliente,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+
+              },
+               success:function(resp){                               
+                $("#modal_editar .modal-body").html(resp.cliente);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
+
+$("#formulario_editar_clientes").submit(function(e){
+    e.preventDefault();
+
+    var cliente = {
+      id_cliente:        $('input[name="id_cliente"]').val(),
+      nombre_cliente:    $('input[name="nombre_cliente_editar"]').val(),
+      dni_cliente:       $('input[name="dni_cliente_editar"]').val(),
+      direccion_cliente: $('textarea[name="direccion_cliente_editar"]').val(),
+      correo_cliente:    $('input[name="correo_cliente_editar"]').val(),
+      codigo_cliente:    $('input[name="codigo_cliente_editar"]').val()
+    };  
+
+   $.ajax({
+            url: base_url + "clientes/editar",
+            type:"POST",
+            data: cliente,
+            beforeSend: function() {
+                     toastr.warning('Actualizando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){                
+                toastr.success('El cliente ha sido Actualizado', 'Cliente Actualizado');                
+                $('#modal_editar').modal('hide');
+               setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+
+
+/*SECCION DE CLIENTES*/
+
+/*SECCION PROVEEDORES*/
+/*SECCION PROVEEDORES*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function enviar_correo ($id,$id_seccion) {
   var id_usuario = $id;
   var id_seccion = $id_seccion;

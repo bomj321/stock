@@ -16,9 +16,7 @@ class Dashboard extends CI_Controller {
 		
 		$this->layout->view("pagina_inicio");
 
-	}
-
-	
+	}	
 
 
 }
