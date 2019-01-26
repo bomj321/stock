@@ -21,6 +21,7 @@ class Usuarios_model extends CI_Model {
 
 	public function listado()
 	{
+		$this->db->where("estado",'1');
 		$this->db->where("nombre_cliente !=",'Administrador');
 		$resultados = $this->db->get('clientes');
 		return $resultados->result();

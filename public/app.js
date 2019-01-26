@@ -284,6 +284,120 @@ $("#formulario_editar_clientes").submit(function(e){
 /*SECCION DE CLIENTES*/
 
 /*SECCION PROVEEDORES*/
+
+$("#formulario_agregar_proveedores").submit(function(e){
+    e.preventDefault();
+
+    var proveedor = {
+      nombre_proveedor:            $('input[name="nombre_proveedor"]').val(),
+      direccion_proveedor_1:       $('textarea[name="direccion_proveedor_1"]').val(),
+      direccion_proveedor_2:       $('textarea[name="direccion_proveedor_2"]').val(),
+      ciudad_proveedor:            $('input[name="ciudad_proveedor"]').val(),
+      pais_proveedor:              $('input[name="pais_proveedor"]').val(),
+      codigo_postal:               $('input[name="codigo_postal"]').val(),
+      contacto_proveedor:          $('input[name="contacto_proveedor"]').val(),
+      numero_proveedor:            $('input[name="numero_proveedor"]').val(),
+      numero_fax:                  $('input[name="numero_fax"]').val(),
+      numero_ruc:                  $('input[name="numero_ruc"]').val(),
+      web_proveedor:               $('input[name="web_proveedor"]').val()
+
+    };  
+
+   $.ajax({
+            url: base_url + "proveedores/registrar",
+            type:"POST",
+            data: proveedor,
+            beforeSend: function() {
+                     toastr.warning('Registrando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){                
+                toastr.success('El proveedor ha sido Registrado', 'Proveedor Registrado');
+
+                $('#modal_agregar').modal('hide');
+
+                setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+
+
+$(".boton_editar_proveedores").click(function(){
+    var id_proveedor =   $(this).val();
+   $.ajax({
+            url: base_url + "proveedores/vista_edicion/" + id_proveedor,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+
+              },
+               success:function(resp){                               
+                $("#modal_editar .modal-body").html(resp.proveedor);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
+
+$("#formulario_editar_proveedores").submit(function(e){
+    e.preventDefault();
+
+    var proveedor = {
+      id_proveedor:                $('input[name="id_proveedor"]').val(),
+      nombre_proveedor:            $('input[name="nombre_proveedor_editar"]').val(),
+      direccion_proveedor_1:       $('textarea[name="direccion_proveedor_1_editar"]').val(),
+      direccion_proveedor_2:       $('textarea[name="direccion_proveedor_2_editar"]').val(),
+      ciudad_proveedor:            $('input[name="ciudad_proveedor_editar"]').val(),
+      pais_proveedor:              $('input[name="pais_proveedor_editar"]').val(),
+      codigo_postal:               $('input[name="codigo_postal_editar"]').val(),
+      contacto_proveedor:          $('input[name="contacto_proveedor_editar"]').val(),
+      numero_proveedor:            $('input[name="numero_proveedor_editar"]').val(),
+      numero_fax:                  $('input[name="numero_fax_editar"]').val(),
+      numero_ruc:                  $('input[name="numero_ruc_editar"]').val(),
+      web_proveedor:               $('input[name="web_proveedor_editar"]').val()
+    };  
+
+   $.ajax({
+            url: base_url + "proveedores/editar",
+            type:"POST",
+            data: proveedor,
+            beforeSend: function() {
+                     toastr.warning('Actualizando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){                
+                toastr.success('El proveedor ha sido Actualizado', 'Proveedor Actualizado');                
+                $('#modal_editar').modal('hide');
+                
+               setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+
+
 /*SECCION PROVEEDORES*/
 
 

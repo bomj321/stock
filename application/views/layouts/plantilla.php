@@ -94,7 +94,7 @@
                    <li><a><i class="fa fa-truck"></i>Proveedores<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                        <!--<li><a href="<?php echo base_url();?>collectionb/list">Colecci&oacute;n de Billetes</a></li>-->
-                      <li><a href="<?php echo base_url();?>proveedores/list">Control de Proveedores</a></li>
+                      <li><a href="<?php echo base_url();?>proveedores/listado">Control de Proveedores</a></li>
                     </ul>
                   </li>
 
@@ -108,14 +108,14 @@
 
                   <li><a><i class="fa fa-gift"></i>Productos <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url();?>productos/list_products">Listado de Productos</a></li>
+                      <li><a href="<?php echo base_url();?>productos/listado">Listado de Productos</a></li>
                     </ul>
                   </li>
 
                   <li><a><i class="fa fa-money"></i> Ventas <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url();?>ventas/list">Ventas de Contado</a></li>
-                      <li><a href="<?php echo base_url();?>ventas/list">Ventas a Credito</a></li>
+                      <li><a href="<?php echo base_url();?>ventas/listado">Ventas de Contado</a></li>
+                      <li><a href="<?php echo base_url();?>ventas/listado">Ventas a Credito</a></li>
                     </ul>
                   </li>  
 
