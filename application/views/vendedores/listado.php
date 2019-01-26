@@ -39,6 +39,10 @@
                                            <button title="Editar Vendedor" type="button" class="btn btn-info boton_editar_vendedores" value="<?php echo $vendedor->id_vendedor; ?>" data-toggle="modal" data-target="#modal_editar">
                                                         <span class="fa fa-pencil"></span>
                                         </button>
+
+                                         <button title="Eliminar Vendedor" type="button" class="btn btn-danger boton_eliminar_vendedores" value="<?php echo $vendedor->id_vendedor; ?>" data-toggle="modal" data-target="#modal_eliminar">
+                                                        <span class="fa fa-trash-o"></span>
+                                        </button> 
                                            
                                         </td>
 
@@ -53,6 +57,7 @@
 <!--Modales-->
 <?php require_once ('modal_agregar.php') ?>
 <?php require_once ('modal_editar.php') ?>
+<?php require_once ('modal_eliminar.php') ?>
 
 <!--Modales-->
 

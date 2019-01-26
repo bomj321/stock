@@ -611,6 +611,59 @@ $("#formulario_editar_vendedores").submit(function(e){
     return false;
   });
 
+$(".boton_eliminar_vendedores").click(function(){
+    var id_vendedor =   $(this).val();
+   $.ajax({
+            url: base_url + "vendedores/vista_eliminar/" + id_vendedor,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+
+              },
+               success:function(resp){                               
+                $("#modal_eliminar .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
+
+$("#formulario_eliminar_vendedores").submit(function(e){
+    e.preventDefault();
+
+    var vendedor = {
+      id_vendedor:        $('input[name="id_vendedor"]').val(),     
+    };  
+
+   $.ajax({
+            url: base_url + "vendedores/eliminar",
+            type:"POST",
+            data: vendedor,
+            beforeSend: function() {
+                     toastr.warning('Eliminando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){                
+                toastr.success('El vendedor ha sido Eliminado', 'Vendedor Eliminado');                
+                $('#modal_editar').modal('hide');
+               setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
 
 /*SECCION VENDEDORES*/
 

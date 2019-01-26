@@ -73,8 +73,19 @@ class Vendedores extends CI_Controller {
 		$data  = array(
 				'vendedor'   => $this->Vendedores_model->seleccionar_vendedor($id_vendedor), 
 			);
-
 		$this->load->view("vendedores/respuesta_modal_eliminar.php",$data);
 		
+	}
+
+	public function eliminar()
+	{
+			$id_vendedor            = $this->input->post("id_vendedor");
+
+			$data = array
+					(
+						'estado'                 => '0',									
+					);	
+			$this->Vendedores_model->actualizar_vendedor($id_vendedor,$data);	
+			
 	}	
 }
