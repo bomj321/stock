@@ -179,7 +179,7 @@ $(document).ready(function () {
 })
 
 /**************CODIGO PARA EL GIF DE CARGA DE LOS CORREOS****************/
-var base_url= 'http://localhost/stock/';
+var base_url= 'http://pruebastock.cpsobrino.mx/';
 
 /*SECCION DE CLIENTES*/
 $("#formulario_agregar_clientes").submit(function(e){
