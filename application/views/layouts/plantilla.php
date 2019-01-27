@@ -40,7 +40,12 @@
 
     <!--FUENTES DE LETRAS-->
     <link href="https://fonts.googleapis.com/css?family=Gugi|Mogra" rel="stylesheet">
-    <!--FUENTES DE LETRAS-->
+    <!--FUENTES DE LETRAS-->   
+
+    <link rel="stylesheet" href="<?php echo base_url();?>public/jquery-ui/jquery-ui.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url();?>public/jquery-ui/jquery-ui.structure.min.css" />
+    <link rel="stylesheet" href="<?php echo base_url();?>public/jquery-ui/jquery-ui.theme.min.css" />
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="<?php echo base_url();?>public/app.css" rel="stylesheet">
 
@@ -248,6 +253,9 @@
     <!--GRAFICAS-->
 
     <!--Scripts Personalizados-->
+   
+
+     <script src="<?php echo base_url();?>public/jquery-ui/jquery-ui.min.js"></script>
      <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
      <script src="<?php echo base_url();?>public/app.js"></script>

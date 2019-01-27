@@ -35,7 +35,7 @@
 
     <?php echo form_open('login/login');  ?><!--FORMULARIO CIERRE Y APERTURA-->
 
-              <h1>Sistema Interno de Pagos</h1>
+              <h1>Sistema Interno</h1>
 	              <?php if($this->session->flashdata("error")):?>
   	              <div class="alert alert-warning">
   	                <p><?php echo $this->session->flashdata("error")?></p>

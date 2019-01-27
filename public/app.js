@@ -668,8 +668,55 @@ $("#formulario_eliminar_vendedores").submit(function(e){
 /*SECCION VENDEDORES*/
 
 
+/*SECCION PRODUCTOS*/
+$("#formulario_agregar_productos").submit(function(e){
+    e.preventDefault();
 
+    var producto = {
+      codigo_producto:          $('input[name="codigo_producto"]').val(),
+      descripcion_producto:     $('input[name="descripcion_producto"]').val(),
+      precio_producto:          $('input[name="precio_producto"]').val(),
+      stock_producto:           $('input[name="stock_producto"]').val(),
+      impuesto_producto:        $('input[name="impuesto_producto"]').val(),
+      codigo_categoria:         $('input[name="codigo_categoria"]').val(),
+      descripcion_categoria:    $('input[name="descripcion_categoria"]').val(),
+      subcodigo_categoria:      $('input[name="subcodigo_categoria"]').val(),
+      subdescripcion_categoria: $('input[name="subdescripcion_categoria"]').val(),
+      codigo_bodega:            $('input[name="codigo_bodega"]').val(),
+      descripcion_bodega:       $('input[name="descripcion_bodega"]').val(),
+      codigo_fabricante:        $('input[name="codigo_fabricante"]').val(),
+      provedores:               $('select[name="provedores[]"]').val(),
+      
 
+    };  
+  
+
+   $.ajax({
+            url: base_url + "productos/registrar",
+            type:"POST",
+            data: producto,
+            beforeSend: function() {
+                     toastr.warning('Registrando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){    
+                toastr.success('El producto ha sido Registrado', 'Producto Registrado');
+                $("#modal_agregar").hide('explode',{pieces: 4}, 1000);
+
+                setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+/*SECCION PRODUCTOS*/
 
 
 
