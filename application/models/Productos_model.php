@@ -25,16 +25,26 @@ public function agregar_producto_proveedor($proveedor_producto){
 	
 }
 
-
-public function seleccionar_cliente($id_cliente){
-	    $this->db->where("id_cliente",$id_cliente);
-		$resultados = $this->db->get('clientes');
+public function informacion_producto($id_producto){
+	    $this->db->where("id_producto",$id_producto);
+		$resultados = $this->db->get('productos');
 		return $resultados->row();
 }
 
-public function actualizar_cliente($id_cliente,$data){
-	    $this->db->where('id_cliente', $id_cliente);
-		return $this->db->update('clientes', $data);	   
+public function producto_proveedores($id_producto){
+	    $this->db->where("id_producto",$id_producto);
+		$resultados = $this->db->get('proveedores_productos');
+		return $resultados->result();
+}
+
+public function eliminar_producto_proveedores($id_producto){
+	        $this->db->where('id_producto', $id_producto);
+			$this->db->delete('proveedores_productos');
+}
+
+public function actualizar_producto($id_producto,$data){
+	    $this->db->where('id_producto', $id_producto);
+		return $this->db->update('productos', $data);	   
 }
 /*SECCION DE LOS CLIENTES*/
 

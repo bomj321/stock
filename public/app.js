@@ -204,7 +204,7 @@ $("#formulario_agregar_clientes").submit(function(e){
                success:function(resp){                
                 toastr.success('El cliente ha sido Registrado', 'Cliente Registrado');
 
-                $('#modal_agregar').modal('hide');
+                $('#modal_agregar').hide('explode',{pieces: 4}, 1000);
 
                 setTimeout(function(){
                    location.reload(); 
@@ -265,7 +265,7 @@ $("#formulario_editar_clientes").submit(function(e){
               },
                success:function(resp){                
                 toastr.success('El cliente ha sido Actualizado', 'Cliente Actualizado');                
-                $('#modal_editar').modal('hide');
+                $('#modal_editar').hide('explode',{pieces: 4}, 1000);
                setTimeout(function(){
                    location.reload(); 
                  }, 2000);
@@ -319,7 +319,7 @@ $("#formulario_eliminar_clientes").submit(function(e){
               },
                success:function(resp){                
                 toastr.success('El cliente ha sido Eliminado', 'Cliente Eliminado');                
-                $('#modal_editar').modal('hide');
+                $('#modal_editar').hide('explode',{pieces: 4}, 1000);
                setTimeout(function(){
                    location.reload(); 
                  }, 2000);
@@ -369,7 +369,7 @@ $("#formulario_agregar_proveedores").submit(function(e){
                success:function(resp){                
                 toastr.success('El proveedor ha sido Registrado', 'Proveedor Registrado');
 
-                $('#modal_agregar').modal('hide');
+                $('#modal_agregar').hide('explode',{pieces: 4}, 1000);
 
                 setTimeout(function(){
                    location.reload(); 
@@ -436,7 +436,7 @@ $("#formulario_editar_proveedores").submit(function(e){
               },
                success:function(resp){                
                 toastr.success('El proveedor ha sido Actualizado', 'Proveedor Actualizado');                
-                $('#modal_editar').modal('hide');
+                $('#modal_editar').hide('explode',{pieces: 4}, 1000);
                 
                setTimeout(function(){
                    location.reload(); 
@@ -491,7 +491,7 @@ $("#formulario_eliminar_proveedores").submit(function(e){
               },
                success:function(resp){                
                 toastr.success('El proveedor ha sido Eliminado', 'Proveedor Eliminado');                
-                $('#modal_editar').modal('hide');
+                $('#modal_editar').hide('explode',{pieces: 4}, 1000);
                setTimeout(function(){
                    location.reload(); 
                  }, 2000);
@@ -536,7 +536,7 @@ $("#formulario_agregar_vendedores").submit(function(e){
                success:function(resp){                
                 toastr.success('El vendedor ha sido Registrado', 'Vendedor Registrado');
 
-                $('#modal_agregar').modal('hide');
+                $('#modal_agregar').hide('explode',{pieces: 4}, 1000);
 
                 setTimeout(function(){
                    location.reload(); 
@@ -595,7 +595,7 @@ $("#formulario_editar_vendedores").submit(function(e){
               },
                success:function(resp){                
                 toastr.success('El vendedor ha sido Actualizado', 'Proveedor Actualizado');                
-                $('#modal_editar').modal('hide');
+                $('#modal_editar').hide('explode',{pieces: 4}, 1000);
                 
                setTimeout(function(){
                    location.reload(); 
@@ -704,6 +704,153 @@ $("#formulario_agregar_productos").submit(function(e){
                 $("#modal_agregar").hide('explode',{pieces: 4}, 1000);
 
                 setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+
+$(".boton_editar_productos").click(function(){
+    var id_producto =   $(this).val();
+   $.ajax({
+            url: base_url + "productos/vista_edicion/" + id_producto,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+
+              },
+               success:function(resp){                               
+                $("#modal_editar .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
+
+
+$(".boton_informacion_productos").click(function(){
+    var id_producto =   $(this).val();
+   $.ajax({
+            url: base_url + "productos/vista_informacion/" + id_producto,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+              },
+               success:function(resp){                               
+                $("#modal_informacion .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
+
+$("#formulario_editar_productos").submit(function(e){
+    e.preventDefault();
+
+    var producto = {
+      id_producto:              $('input[name="id_producto"]').val(),
+      codigo_producto:          $('input[name="codigo_producto_editar"]').val(),
+      descripcion_producto:     $('input[name="descripcion_producto_editar"]').val(),
+      precio_producto:          $('input[name="precio_producto_editar"]').val(),
+      stock_producto:           $('input[name="stock_producto_editar"]').val(),
+      impuesto_producto:        $('input[name="impuesto_producto_editar"]').val(),
+      codigo_categoria:         $('input[name="codigo_categoria_editar"]').val(),
+      descripcion_categoria:    $('input[name="descripcion_categoria_editar"]').val(),
+      subcodigo_categoria:      $('input[name="subcodigo_categoria_editar"]').val(),
+      subdescripcion_categoria: $('input[name="subdescripcion_categoria_editar"]').val(),
+      codigo_bodega:            $('input[name="codigo_bodega_editar"]').val(),
+      descripcion_bodega:       $('input[name="descripcion_bodega_editar"]').val(),
+      codigo_fabricante:        $('input[name="codigo_fabricante_editar"]').val(),
+      provedores:               $('select[name="provedores_editar[]"]').val(),
+      
+
+    };  
+  
+
+   $.ajax({
+            url: base_url + "productos/editar",
+            type:"POST",
+            data: producto,
+            beforeSend: function() {
+                     toastr.warning('Actualizando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){    
+                toastr.success('El producto ha sido Actualizaado', 'Producto Actualizado');
+                $("#modal_editar").hide('explode',{pieces: 4}, 1000);
+
+                setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+
+$(".boton_eliminar_productos").click(function(){
+    var id_producto =   $(this).val();
+   $.ajax({
+            url: base_url + "productos/vista_eliminar/" + id_producto,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+
+              },
+               success:function(resp){                               
+                $("#modal_eliminar .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
+
+$("#formulario_eliminar_productos").submit(function(e){
+    e.preventDefault();
+
+    var producto = {
+      id_producto:        $('input[name="id_producto"]').val(),     
+    };  
+
+   $.ajax({
+            url: base_url + "productos/eliminar",
+            type:"POST",
+            data: producto,
+            beforeSend: function() {
+                     toastr.warning('Eliminando Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){                
+                toastr.success('El producto ha sido Eliminado', 'Producto Eliminado');                
+                $('#modal_eliminar').hide('explode',{pieces: 4}, 1000);
+               setTimeout(function(){
                    location.reload(); 
                  }, 2000);
 

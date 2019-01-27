@@ -38,12 +38,17 @@
                                          <td><?php echo $producto->precio_producto;?></td>
                                          <td><?php echo $producto->stock_producto;?></td>                    
                                          <td>
-                                           <button title="Editar Producto" type="button" class="btn btn-info boton_editar_proveedores" value="<?php echo $producto->id_producto; ?>" data-toggle="modal" data-target="#modal_editar">
+                                           <button title="Editar Producto" type="button" class="btn btn-info boton_editar_productos" value="<?php echo $producto->id_producto; ?>" data-toggle="modal" data-target="#modal_editar">
                                                         <span class="fa fa-pencil"></span>
                                         </button>
 
-                                          <button title="Eliminar Producto" type="button" class="btn btn-danger boton_eliminar_proveedores" value="<?php echo $producto->id_producto; ?>" data-toggle="modal" data-target="#modal_eliminar">
+                                        
+                                          <button title="Eliminar Producto" type="button" class="btn btn-danger boton_eliminar_productos" value="<?php echo $producto->id_producto; ?>" data-toggle="modal" data-target="#modal_eliminar">
                                                         <span class="fa fa-trash-o"></span>
+                                        </button>  
+
+                                         <button title="Informaci&oacute;n Producto" type="button" class="btn btn-primary boton_informacion_productos" value="<?php echo $producto->id_producto; ?>" data-toggle="modal" data-target="#modal_informacion">
+                                                        <span class="fa fa-eye"></span>
                                         </button>                                          
                                          
                                            
@@ -64,6 +69,7 @@
 <?php require_once ('modal_agregar.php') ?>
 <?php require_once ('modal_editar.php') ?>
 <?php require_once ('modal_eliminar.php') ?>
+<?php require_once ('modal_informacion.php') ?>
 
 <!--Modales-->
 
