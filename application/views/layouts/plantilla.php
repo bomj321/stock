@@ -119,8 +119,8 @@
 
                   <li><a><i class="fa fa-money"></i> Ventas <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo base_url();?>ventas/listado">Ventas de Contado</a></li>
-                      <li><a href="<?php echo base_url();?>ventas/listado">Ventas a Credito</a></li>
+                      <li><a href="<?php echo base_url();?>ventas/listadocontado">Ventas de Contado</a></li>
+                      <li><a href="<?php echo base_url();?>ventas/listadocredito">Ventas a Credito</a></li>
                     </ul>
                   </li>  
 

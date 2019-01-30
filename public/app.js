@@ -148,7 +148,7 @@ $(document).ready(function () {
              
               
 
-         $("#ventas_debito").DataTable({
+         $("#ventas_credito").DataTable({
             language: {
                "sProcessing":     "Procesando...",
                "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -179,7 +179,7 @@ $(document).ready(function () {
 })
 
 /**************CODIGO PARA EL GIF DE CARGA DE LOS CORREOS****************/
-var base_url= 'http://pruebastock.cpsobrino.mx/';
+var base_url= 'http://localhost/stock/';
 
 /*SECCION DE CLIENTES*/
 $("#formulario_agregar_clientes").submit(function(e){
@@ -866,9 +866,41 @@ $("#formulario_eliminar_productos").submit(function(e){
 /*SECCION PRODUCTOS*/
 
 
+/*SECCION VENTAS DE CONTADO*/
 
+$(document).ready(function() {
+ 
+    $('#dni_cliente').autocomplete({
+      source: base_url + "ventas/respuesta_clientes",
+      minLength: 1,
+      select: function(event,ui){
+        event.preventDefault();
+                       $('#id_cliente').val(ui.item.id_cliente);          
+                       $('#nombre_cliente').val(ui.item.nombre_cliente);
+                       $('#correo_cliente').val(ui.item.correo_cliente);                      
+          }
+               
+    
+    });
+ 
+  });
 
+$("#dni_cliente" ).on( "keydown", function( event ) {
+            if (event.keyCode== $.ui.keyCode.LEFT || event.keyCode== $.ui.keyCode.RIGHT || event.keyCode== $.ui.keyCode.UP || event.keyCode== $.ui.keyCode.DOWN || event.keyCode== $.ui.keyCode.DELETE || event.keyCode== $.ui.keyCode.BACKSPACE )
+            {
+                             $('#id_cliente').val(""); 
+                             $('#nombre_cliente').val("");
+                             $('#correo_cliente').val("");                           
+                      
+            }
+            if (event.keyCode==$.ui.keyCode.DELETE){
+                             $('#id_cliente').val(""); 
+                             $('#nombre_cliente').val("");
+                             $('#correo_cliente').val("");  
+            }
+      }); 
 
+/*SECCION VENTAS DE CONTADO*/
 
 
 
