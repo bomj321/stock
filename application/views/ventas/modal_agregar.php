@@ -39,7 +39,7 @@
                <div class="col-md-3 col-sm-12 col-xs-12">
                             <div class="form-group">
                                   <label for="description_producto">Producto</label>
-                                  <input required type="text" class="form-control" id="description_producto" placeholder="Producto" name="description_producto" >  
+                                  <input type="text" class="form-control" id="description_producto" placeholder="Producto" name="description_producto" >  
                                 <!--INPUT DEL ID DEL CLIENTE-->
                                 <input type="hidden" id="id_producto" name="id_producto">
                                 <!--INPUT DEL ID DEL CLIENTE-->                                        
@@ -71,19 +71,19 @@
                   </div>
 
 <!--INPUT ESCONDIDO CON MAS INFORMACION-->
-<input type="hidden" id="informacion_producto" name="id="informacion_producto"">
+<input type="hidden" id="informacion_producto">
 
 <!--INPUT ESCONDIDO CON MAS INFORMACION-->
             </div>
 
             <div class="row">
 
-                <table id="tbventas" class="table table-bordered table-hover bulk_action dt-responsive nowrap" cellspacing="0" width="100%">
+                <table id="tbventas" class="table table-bordered bulk_action dt-responsive nowrap" cellspacing="0" width="100%">
                                 <thead>
                                     <tr>
                                         <th>Codigo</th>
-                                        <th>Descripcion</th>
                                         <th>Cantidad</th>
+                                        <th>Producto</th>
                                         <th>Precio Unitario</th>
                                         <th>Impuesto Agregado</th>
                                         <th>Subtotal</th>
@@ -109,16 +109,10 @@
                   <div class="col-md-4 col-sm-4 col-xs-4">
                             <div class="form-group">
                                 <label for="descuento_compra">Descto.</label>
-                                <input type="text" class="form-control" id="descuento_compra" name='descuento_compra' placeholder="Descuento">
+                                <input type="text" class="form-control" id="descuento_compra" name='descuento_compra' placeholder="Descuento en Porcentaje">
                            </div>
-                  </div>  
-
-                  <div class="col-md-3">
-                     <div class="form-group">
-                                <label for="descuento_total">Descto. Total</label>
-                                <input type="text" class="form-control" id="descuento_total" name='descuento_total' placeholder="Descuento Total" disabled>
-                           </div>
-                  </div>  
+                  </div>
+                
              </div>
 
               <div class="row">
@@ -135,7 +129,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Realizar Venta</button>
+            <button type="submit" class="btn btn-primary" disabled>Realizar Venta</button>
           </div>
    </form>
 <!--FORMULARIO-->    

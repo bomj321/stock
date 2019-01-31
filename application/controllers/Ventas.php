@@ -24,36 +24,62 @@ class Ventas extends CI_Controller {
 
 	public function respuesta_clientes()
 	{
-		$dni = $_GET['term'];		
+				$dni = $_GET['term'];		
 
-		$busqueda= "SELECT * FROM clientes WHERE dni_cliente LIKE '%".$dni."%'";
-		$busqueda_dni = $this->db->query($busqueda);
+				$busqueda= "SELECT * FROM clientes WHERE nombre_cliente != 'Administrador' AND dni_cliente LIKE '%".$dni."%'";
+				$busqueda_dni = $this->db->query($busqueda);
+				
+				$return_arr = array();	
+			
+			/* Retrieve and store in array the results of the query.*/
+			foreach($busqueda_dni->result_array() as $row) {
+				$row_array['value']          = $row['dni_cliente'];
+				$row_array['id_cliente']     = $row['id_cliente'];
+				$row_array['nombre_cliente'] = $row['nombre_cliente'];		
+				$row_array['correo_cliente'] =$row['correo_cliente'];		
+				array_push($return_arr,$row_array);
+		    }
+
+		       
+				/* Free connection resources. */
+				/*mysqli_close($connection);*/
+				/* Toss back results as json encoded array. */
+				echo json_encode($return_arr);
+	
+	}
+
+	public function respuesta_productos()
+	{
+				$producto = $_GET['term'];
+				$busqueda= "SELECT * FROM productos WHERE descripcion_producto LIKE '%".$producto."%'";
+				$busqueda_producto = $this->db->query($busqueda);
+				
+				$return_arr = array();	
+			
+			/* Retrieve and store in array the results of the query.*/
+			foreach($busqueda_producto->result_array() as $row) {
+				$row_array['value']               = $row['descripcion_producto'];
+				$row_array['id_producto']         = $row['id_producto'];
+				$row_array['codigo_producto']     = $row['codigo_producto'];		
+				$row_array['precio_producto']     = $row['precio_producto'];
+				$row_array['impuesto_producto']   = $row['impuesto_producto'];		
+				array_push($return_arr,$row_array);
+		    }
+
+		       
+				/* Free connection resources. */
+				/*mysqli_close($connection);*/
+				/* Toss back results as json encoded array. */
+				echo json_encode($return_arr);
+	
+	}
 		
-		$return_arr = array();	
-	
-	/* Retrieve and store in array the results of the query.*/
-	foreach($busqueda_dni->result_array() as $row) {
-		$row_array['value']          = $row['dni_cliente'];
-		$row_array['id_cliente']     = $row['id_cliente'];
-		$row_array['nombre_cliente'] = $row['nombre_cliente'];		
-		$row_array['correo_cliente'] =$row['correo_cliente'];		
-		array_push($return_arr,$row_array);
-    }
-
-       
-		/* Free connection resources. */
-		/*mysqli_close($connection);*/
-		/* Toss back results as json encoded array. */
-		echo json_encode($return_arr);
-	
-}
-		
 
 
 
 	
 
-	/*public function registrar()
+/*	public function registrar()
 	{
 		    $nombre_vendedor        = $this->input->post("nombre_vendedor");
 			$dni_vendedor           = $this->input->post("dni_vendedor");

@@ -875,6 +875,7 @@ $(document).ready(function() {
       minLength: 1,
       select: function(event,ui){
         event.preventDefault();
+                       $('#dni_cliente').val(ui.item.value);
                        $('#id_cliente').val(ui.item.id_cliente);          
                        $('#nombre_cliente').val(ui.item.nombre_cliente);
                        $('#correo_cliente').val(ui.item.correo_cliente);                      
@@ -882,6 +883,21 @@ $(document).ready(function() {
                
     
     });
+
+     $('#description_producto').autocomplete({
+      source: base_url + "ventas/respuesta_productos",
+      minLength: 1,
+      select: function(event,ui){
+        event.preventDefault();
+                       $('#description_producto').val(ui.item.value);
+                       $('#id_producto').val(ui.item.id_producto);          
+                       $('#codigo_producto').val(ui.item.codigo_producto);
+                       $('#informacion_producto').val(ui.item.precio_producto+'*'+ui.item.impuesto_producto);
+          }
+               
+    
+    });
+
  
   });
 
@@ -899,6 +915,148 @@ $("#dni_cliente" ).on( "keydown", function( event ) {
                              $('#correo_cliente').val("");  
             }
       }); 
+
+
+
+$("#description_producto" ).on( "keydown", function( event ) {
+            if (event.keyCode== $.ui.keyCode.LEFT || event.keyCode== $.ui.keyCode.RIGHT || event.keyCode== $.ui.keyCode.UP || event.keyCode== $.ui.keyCode.DOWN || event.keyCode== $.ui.keyCode.DELETE || event.keyCode== $.ui.keyCode.BACKSPACE )
+            {
+                             $('#id_producto').val(""); 
+                             $('#codigo_producto').val("");
+                             $('#informacion_producto').val("");
+                      
+            }
+            if (event.keyCode==$.ui.keyCode.DELETE){
+                             $('#id_producto').val(""); 
+                             $('#codigo_producto').val("");
+                             $('#informacion_producto').val("");
+            }
+      }); 
+
+
+/*PARTE DE LA  TABLA DE VENTAS*/
+
+$('#addon_cantidad').click(function(e){
+
+/*INPUTS ESCONDIDOS*/
+   var id_cliente                 = $('#id_cliente').val();
+   var id_producto                = $('#id_producto').val();
+   var informacion_producto       = $('#informacion_producto').val()
+
+/*INPUTS ESCONDIDOS*/  
+
+
+
+/*INFORMACION MAS RELEVANTE*/
+   var dni_cliente                = $('#dni_cliente').val();
+   var description_producto       = $('#description_producto').val();
+   var codigo_producto            = $('#codigo_producto').val();
+   var comentario_venta           = $('#comentario_venta').val();
+   var cantidad_comprado_producto = $('#cantidad_comprado_producto').val();
+
+/*INFORMACION MAS RELEVANTE*/
+
+/*SEPARACION DE CADENA*/
+
+   var infoproducto               = informacion_producto.split("*");
+/*SEPARACION DE CADENA*/
+
+
+
+   if(dni_cliente == ''){
+      toastr.warning('Ingrese un Cliente');
+      return false
+   }
+
+   if(description_producto == ''){
+      toastr.warning('Ingrese un Producto');
+      return false
+   }
+
+ /*  if(comentario_venta == ''){
+      toastr.warning('Ingrese un Comentario');
+      return false
+   }*/
+
+   if(cantidad_comprado_producto == ''){
+      toastr.warning('Ingrese una Cantidad');
+      return false
+   }
+
+var precio_unitario = parseFloat(infoproducto[0]);
+var inpuesto_agregado = parseFloat(infoproducto[1]);
+var cantidad_comprada_numero = Number(cantidad_comprado_producto); 
+var total_sin_descuento = (precio_unitario*cantidad_comprada_numero)+((precio_unitario*cantidad_comprada_numero)*(inpuesto_agregado/100));
+var plantilla_tabla = `
+<tr>
+<td>
+<input class='input_venta' readonly value='${codigo_producto}'></input>
+<input type='hidden'  value='${id_cliente}' name='id_cliente'></input>
+<input type='hidden'  value='${id_producto}' name='id_producto'></input>
+</td>
+
+
+<td><input class='input_venta' readonly value='${cantidad_comprada_numero}'></input></td>
+
+<td>
+<p>${description_producto}</p>
+<p class="text-danger">${comentario_venta}</p>
+</td>
+
+<td><input class='input_venta' readonly value='${precio_unitario}'></input></td>
+<td><input class='input_venta' readonly value='${inpuesto_agregado}'></input></td>
+<td><input class='input_venta' type='hidden' readonly value='${total_sin_descuento}'></input><p>${total_sin_descuento}</p></td>
+<td><button type='button' class='btn btn-danger btn-remove-producto btn-block'><span class='fa fa-remove'></span></button></td>
+
+</tr>
+`
+$("#tbventas tbody").append(plantilla_tabla);
+sumar();
+
+ $('#description_producto').val(null);
+ $('#id_producto').val(null);          
+ $('#codigo_producto').val(null);
+ $('#informacion_producto').val(null);
+ $('#comentario_venta').val(null);
+ $('#cantidad_comprado_producto').val(null);
+})
+
+
+$('#descuento_compra').on('keyup',function(){
+    sumar();
+})
+
+
+
+$(document).on("click",".btn-remove-producto", function(){
+    $(this).closest("tr").remove();
+    sumar();
+
+});
+
+
+function sumar(){
+    subtotal = 0;
+    $("#tbventas tbody tr").each(function(){
+        subtotal = subtotal + Number($(this).find("td:eq(5)").text());
+    });
+
+    $("#subtotal").val(subtotal);
+  
+    descuento_compra = Number($("#descuento_compra").val());
+
+    total = subtotal - (subtotal* (descuento_compra/100));
+    $("#total").val(parseFloat(total).toFixed(4));
+}
+
+/*PARTE DE LA  TABLA DE VENTAS*/
+
+
+
+
+
+
+
 
 /*SECCION VENTAS DE CONTADO*/
 

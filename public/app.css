@@ -13,10 +13,19 @@
 	margin-top: 100px;
 }
 
+
+/*Seccion del dashboard*/
+
+
+/*SECCION DE VENTA DE CONTADO*/
 ul.ui-autocomplete {
     z-index: 1100;
 }
 
-/*Seccion del dashboard*/
-
+.input_venta{
+width:100%; 
+text-align:center;
+border: 0;
+}
+/*SECCION DE VENTA DE CONTADO*/
 
