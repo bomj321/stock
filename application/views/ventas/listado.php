@@ -33,13 +33,21 @@
                          <tbody>
                              <?php if(!empty($ventas_contado)):?>
                                  <?php foreach($ventas_contado as $venta_contado):?>
+                                    <?php 
+                                        if (empty($venta_contado->descuento_compra)) {
+                                            $descuento = 0;
+                                        }else{
+                                            $descuento = $venta_contado->descuento_compra;
+                                        }
+
+                                     ?>
                                      <tr>
                                          <td><?php echo $venta_contado->id_venta_contado;?></td>    
                                          <td><?php echo $venta_contado->nombre_cliente;?></td>
                                          <td><?php echo $venta_contado->nombre_vendedor;?></td>
                                          <td><?php echo $venta_contado->codigo_compra;?></td>
-                                         <td><?php echo $venta_contado->descuento_compra;?>%</td>
-                                         <td><?php echo number_format($venta_contado->precio_producto-($venta_contado->precio_producto*($venta_contado->descuento_compra/100)), 3, '.', '');?> Soles</td>
+                                         <td><?php echo $descuento;?>%</td>
+                                         <td><?php echo number_format($venta_contado->precio_producto-($venta_contado->precio_producto*($descuento/100)), 3, '.', '');?> Soles</td>
                                          <td><?php echo $venta_contado->fecha_compra;?></td>                    
                                          <td>
                                           <button title="Informaci&oacute;n de la Venta" type="button" class="btn btn-primary boton_informacion_venta" value="<?php echo $venta_contado->codigo_compra; ?>" data-toggle="modal" data-target="#modal_informacion">
