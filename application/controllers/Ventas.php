@@ -139,9 +139,17 @@ public function venta_contado()
 			
 	}
 
+public function vista_informacion($codigo_compra){			
+
+		    $data  = array(
+				'ventas'       => $this->Ventas_model->informacion_venta($codigo_compra),
+				
+			);
+
+		$this->load->view("ventas/respuesta_modal_informacion",$data);
+	}	
 
 
-	
 
 /*SECCION DE VENTAS NORMALES*/
 

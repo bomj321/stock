@@ -47,7 +47,7 @@ class Vendedores extends CI_Controller {
 				'vendedor'   => $this->Vendedores_model->seleccionar_vendedor($id_vendedor), 
 			);
 
-		$this->load->view("vendedores/respuesta_modal_editar.php",$data);
+		$this->load->view("vendedores/respuesta_modal_editar",$data);
 		
 	}	
 
@@ -73,7 +73,7 @@ class Vendedores extends CI_Controller {
 		$data  = array(
 				'vendedor'   => $this->Vendedores_model->seleccionar_vendedor($id_vendedor), 
 			);
-		$this->load->view("vendedores/respuesta_modal_eliminar.php",$data);
+		$this->load->view("vendedores/respuesta_modal_eliminar",$data);
 		
 	}
 

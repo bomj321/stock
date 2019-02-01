@@ -61,7 +61,7 @@ class Proveedores extends CI_Controller {
 				'proveedor'   => $this->Proveedores_model->seleccionar_proveedor($id_proveedor), 
 			);
 
-		$this->load->view("proveedores/respuesta_modal_editar.php",$data);
+		$this->load->view("proveedores/respuesta_modal_editar",$data);
 
 	}	
 
@@ -104,7 +104,7 @@ class Proveedores extends CI_Controller {
 				'proveedor'   => $this->Proveedores_model->seleccionar_proveedor($id_proveedor), 
 			);
 
-		$this->load->view("proveedores/respuesta_modal_eliminar.php",$data);
+		$this->load->view("proveedores/respuesta_modal_eliminar",$data);
 		
 	}
 

@@ -7,7 +7,7 @@ class Ventas_model extends CI_Model {
 /*SECCION DE VENTAS CONTADO*/
 public function listado()
 {
-	$this->db->select('vc.*,clientes.nombre_cliente as nombre_cliente,clientes.dni_cliente as dni_cliente,productos.codigo_producto as codigo_producto,productos.descripcion_producto as descripcion_producto,vendedores.nombre_vendedor as nombre_vendedor');
+	$this->db->select('vc.*,clientes.nombre_cliente as nombre_cliente,clientes.dni_cliente as dni_cliente,productos.codigo_producto as codigo_producto,productos.descripcion_producto as descripcion_producto,vendedores.nombre_vendedor as nombre_vendedor,SUM(vc.precio_producto) as precio_producto');
 	$this->db->from('ventas_contado vc');
 	$this->db->join('productos productos','vc.id_producto = productos.id_producto');
 	$this->db->join('clientes clientes','vc.id_cliente = clientes.id_cliente');
@@ -17,13 +17,11 @@ public function listado()
 	return $resultados->result();
 }
 
-public function listado_todo($codigo_compra)
+public function informacion_venta($codigo_compra)
 {
-	$this->db->select('vc.*,clientes.nombre_cliente as nombre_cliente,clientes.dni_cliente as dni_cliente,productos.codigo_producto as codigo_producto,productos.descripcion_producto as descripcion_producto,vendedores.nombre_vendedor as nombre_vendedor');
+	$this->db->select('vc.*,productos.codigo_producto as codigo_producto,productos.descripcion_producto as descripcion_producto,productos.precio_producto as precio_producto,productos.impuesto_producto as impuesto_producto');
 	$this->db->from('ventas_contado vc');
 	$this->db->join('productos productos','vc.id_producto = productos.id_producto');
-	$this->db->join('clientes clientes','vc.id_cliente = clientes.id_cliente');
-	$this->db->join('vendedores vendedores','vc.id_vendedor = vendedores.id_vendedor');	
     $this->db->where("codigo_compra",$codigo_compra);
 	$resultados = $this->db->get();
 	return $resultados->result();

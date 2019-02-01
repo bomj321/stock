@@ -85,7 +85,7 @@ class Productos extends CI_Controller {
 				'proveedores'             => $this->Proveedores_model->listado()
 			);
 
-		$this->load->view("productos/respuesta_modal_informacion.php",$data);
+		$this->load->view("productos/respuesta_modal_informacion",$data);
 	}	
 
 	public function vista_edicion($id_producto){
@@ -103,7 +103,7 @@ class Productos extends CI_Controller {
 				'proveedores'             => $this->Proveedores_model->listado()
 			);
 
-		$this->load->view("productos/respuesta_modal_editar.php",$data);
+		$this->load->view("productos/respuesta_modal_editar",$data);
 	}
 
 	public function editar()
@@ -165,7 +165,7 @@ class Productos extends CI_Controller {
 		$data  = array(
 				'producto'   => $this->Productos_model->informacion_producto($id_producto), 
 			);
-		$this->load->view("productos/respuesta_modal_eliminar.php",$data);
+		$this->load->view("productos/respuesta_modal_eliminar",$data);
 		
 	}
 
