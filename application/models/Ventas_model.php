@@ -19,8 +19,8 @@ public function listado()
 
 
 
-public function agregar_proveedor($data){
-	return $this->db->insert("proveedores",$data);
+public function agregar_venta_contado($data){
+	return $this->db->insert("ventas_contado",$data);
 }
 
 

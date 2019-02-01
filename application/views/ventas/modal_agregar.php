@@ -10,7 +10,7 @@
      <form class="form-horizontal" id="formulario_venta_contado">
           <div class="modal-body">                            
               <div class="row">
-                      <div class="col-md-4 col-sm-12 col-xs-12">
+                      <div class="col-md-3 col-sm-12 col-xs-12">
                             <div class="form-group">
                                   <label for="dni_cliente">DNI del Cliente</label>
                                   <input required type="text" class="form-control" id="dni_cliente" placeholder="DNI del Cliente" name="dni_cliente" >  
@@ -20,17 +20,28 @@
                             </div>
                       </div>
 
-                      <div class="col-md-4 col-sm-12 col-xs-12">
+                      <div class="col-md-3 col-sm-12 col-xs-12">
                            <div class="form-group">
                                 <label for="nombre_cliente">Nombre del Cliente</label>
                                 <input  type="text" class="form-control" id="nombre_cliente" placeholder="Nombre del Cliente" name="nombre_cliente" disabled>  
                            </div>
                       </div> 
 
-                      <div class="col-md-4 col-sm-12 col-xs-12">
+                      <div class="col-md-3 col-sm-12 col-xs-12">
                            <div class="form-group">
                                 <label for="correo_cliente">Correo del Cliente</label>
                                 <input  type="text" class="form-control" id="correo_cliente" placeholder="Correo del Cliente" name="correo_cliente" disabled>  
+                           </div>
+                      </div>
+
+                        <div class="col-md-3 col-sm-12 col-xs-12">
+                           <div class="form-group">
+                                <label for="nombre_vendedor">Vendedor</label>
+                                <input  type="text" class="form-control" id="nombre_vendedor" placeholder="Vendedor" required>  
+
+                                 <!--INPUT DEL ID DEL CLIENTE-->
+                                <input type="hidden" id="id_vendedor" name="id_vendedor">
+                                <!--INPUT DEL ID DEL CLIENTE-->    
                            </div>
                       </div>                
             </div>
@@ -40,9 +51,9 @@
                             <div class="form-group">
                                   <label for="description_producto">Producto</label>
                                   <input type="text" class="form-control" id="description_producto" placeholder="Producto" name="description_producto" >  
-                                <!--INPUT DEL ID DEL CLIENTE-->
+                                <!--INPUT DEL ID DEL PRODUCTO-->
                                 <input type="hidden" id="id_producto" name="id_producto">
-                                <!--INPUT DEL ID DEL CLIENTE-->                                        
+                                <!--INPUT DEL ID DEL PRODUCTO-->                                        
                             </div>
                 </div>
 
@@ -119,7 +130,7 @@
                   <div class="col-md-4 col-sm-4 col-xs-4">
                               <div class="form-group">
                                 <label for="total">Total de la Compra</label>
-                                <input type="text" class="form-control" id="total" placeholder="Total" readonly>
+                                <input type="text" class="form-control" id="total" name='precio_producto' placeholder="Total" readonly>
                            </div>
                   </div>    
              </div> 
@@ -129,7 +140,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" disabled>Realizar Venta</button>
+            <button type="submit" class="btn btn-primary" disabled id='venta_boton'>Realizar Venta</button>
           </div>
    </form>
 <!--FORMULARIO-->    

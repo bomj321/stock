@@ -898,8 +898,39 @@ $(document).ready(function() {
     
     });
 
+
+   $('#nombre_vendedor').autocomplete({
+      source: base_url + "ventas/respuesta_vendedores",
+      minLength: 1,
+      select: function(event,ui){
+        event.preventDefault();
+                       $('#nombre_vendedor').val(ui.item.value);
+                       $('#id_vendedor').val(ui.item.id_vendedor);         
+                      
+          }
+               
+    
+    });
+
+
+
  
   });
+
+$("#nombre_vendedor" ).on( "keydown", function( event ) {
+            if (event.keyCode== $.ui.keyCode.LEFT || event.keyCode== $.ui.keyCode.RIGHT || event.keyCode== $.ui.keyCode.UP || event.keyCode== $.ui.keyCode.DOWN || event.keyCode== $.ui.keyCode.DELETE || event.keyCode== $.ui.keyCode.BACKSPACE )
+            {
+                             $('#nombre_vendedor').val(""); 
+                             $('#id_vendedor').val("");
+                      
+            }
+            if (event.keyCode==$.ui.keyCode.DELETE){
+                             $('#nombre_vendedor').val(""); 
+                             $('#id_vendedor').val("");
+            }
+      }); 
+
+
 
 $("#dni_cliente" ).on( "keydown", function( event ) {
             if (event.keyCode== $.ui.keyCode.LEFT || event.keyCode== $.ui.keyCode.RIGHT || event.keyCode== $.ui.keyCode.UP || event.keyCode== $.ui.keyCode.DOWN || event.keyCode== $.ui.keyCode.DELETE || event.keyCode== $.ui.keyCode.BACKSPACE )
@@ -935,13 +966,14 @@ $("#description_producto" ).on( "keydown", function( event ) {
 
 
 /*PARTE DE LA  TABLA DE VENTAS*/
-
+/*************************PARTE DE AGREGAR PRODUCTOS********************/
 $('#addon_cantidad').click(function(e){
 
 /*INPUTS ESCONDIDOS*/
    var id_cliente                 = $('#id_cliente').val();
    var id_producto                = $('#id_producto').val();
    var informacion_producto       = $('#informacion_producto').val()
+   var id_vendedor                = $('#id_vendedor').val();
 
 /*INPUTS ESCONDIDOS*/  
 
@@ -992,20 +1024,23 @@ var plantilla_tabla = `
 <td>
 <input class='input_venta' readonly value='${codigo_producto}'></input>
 <input type='hidden'  value='${id_cliente}' name='id_cliente'></input>
-<input type='hidden'  value='${id_producto}' name='id_producto'></input>
+<input type='hidden'  value='${id_producto}' name='id_producto[]'></input>
+<input type='hidden'  value='${id_vendedor}' name='id_vendedor'></input>
+<input type='hidden'  value='${comentario_venta}' name='comentario_venta[]'></input>
+
 </td>
 
 
-<td><input class='input_venta' readonly value='${cantidad_comprada_numero}'></input></td>
+<td><input class='input_venta' name='cantidad_comprado_producto[]' readonly value='${cantidad_comprada_numero}'></input></td>
 
 <td>
 <p>${description_producto}</p>
 <p class="text-danger">${comentario_venta}</p>
 </td>
 
-<td><input class='input_venta' readonly value='${precio_unitario}'></input></td>
+<td><input class='input_venta' readonly name='precio_producto[]' value='${precio_unitario}'></input></td>
 <td><input class='input_venta' readonly value='${inpuesto_agregado}'></input></td>
-<td><input class='input_venta' type='hidden' readonly value='${total_sin_descuento}'></input><p>${total_sin_descuento}</p></td>
+<td><input class='input_venta' type='hidden' value='${total_sin_descuento}'></input><p>${total_sin_descuento}</p></td>
 <td><button type='button' class='btn btn-danger btn-remove-producto btn-block'><span class='fa fa-remove'></span></button></td>
 
 </tr>
@@ -1019,14 +1054,21 @@ sumar();
  $('#informacion_producto').val(null);
  $('#comentario_venta').val(null);
  $('#cantidad_comprado_producto').val(null);
+
+ $('#venta_boton').prop("disabled", false);
 })
+/*************************PARTE DE AGREGAR PRODUCTOS********************/
 
 
+/******PARTE DESCUENTO*******/
 $('#descuento_compra').on('keyup',function(){
     sumar();
 })
+/******PARTE DESCUENTO*******/
 
 
+
+/*********REMOVER PRODUCTO*************/
 
 $(document).on("click",".btn-remove-producto", function(){
     $(this).closest("tr").remove();
@@ -1034,7 +1076,11 @@ $(document).on("click",".btn-remove-producto", function(){
 
 });
 
+/*********REMOVER PRODUCTO*************/
 
+
+
+/*******FUNCION PARA SUMAR*********/
 function sumar(){
     subtotal = 0;
     $("#tbventas tbody tr").each(function(){
@@ -1048,11 +1094,48 @@ function sumar(){
     total = subtotal - (subtotal* (descuento_compra/100));
     $("#total").val(parseFloat(total).toFixed(4));
 }
-
+/*******FUNCION PARA SUMAR*********/
 /*PARTE DE LA  TABLA DE VENTAS*/
 
 
+$("#formulario_venta_contado").submit(function(e){
+    e.preventDefault();
 
+    var venta = {
+      id_cliente:                          $('input[name="id_cliente"]').val(),
+      id_producto:                         $('input[name="id_producto[]"]').map(function(){return $(this).val();}).get(),
+      id_vendedor:                         $('input[name="id_vendedor"]').val(),
+      cantidad_comprado_producto:          $('input[name="cantidad_comprado_producto[]"]').map(function(){return $(this).val();}).get(),
+      precio_producto:                     $('input[name="precio_producto[]"]').map(function(){return $(this).val();}).get(),
+      comentario_venta:                    $('input[name="comentario_venta[]"]').map(function(){return $(this).val();}).get(),
+      descuento_compra:                    $('input[name="descuento_compra"]').val(),         
+    };  
+  
+
+   $.ajax({
+            url: base_url + "ventas/venta_contado",
+            type:"POST",
+            data: venta,
+            beforeSend: function() {
+                     toastr.warning('Realizando Venta Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){    
+                toastr.success('Venta Realizada!!!!', 'Venta');
+                $("#modal_agregar").hide('explode',{pieces: 4}, 1000); 
+                setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
 
 
 

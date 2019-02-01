@@ -75,32 +75,71 @@ class Ventas extends CI_Controller {
 	}
 		
 
+	public function respuesta_vendedores()
+	{
+				$vendedor = $_GET['term'];
+				$busqueda= "SELECT * FROM vendedores WHERE nombre_vendedor LIKE '%".$vendedor."%'";
+				$busqueda_vendedor = $this->db->query($busqueda);
+				
+				$return_arr = array();	
+			
+			/* Retrieve and store in array the results of the query.*/
+			foreach($busqueda_vendedor->result_array() as $row) {
+				$row_array['value']               = $row['nombre_vendedor'];
+				$row_array['id_vendedor']         = $row['id_vendedor'];				
+				array_push($return_arr,$row_array);
+		    }
 
+		       
+				/* Free connection resources. */
+				/*mysqli_close($connection);*/
+				/* Toss back results as json encoded array. */
+				echo json_encode($return_arr);
+	
+	}
 
 	
 
-/*	public function registrar()
+public function venta_contado()
 	{
-		    $nombre_vendedor        = $this->input->post("nombre_vendedor");
-			$dni_vendedor           = $this->input->post("dni_vendedor");
-			$correo_vendedor        = $this->input->post("correo_vendedor");
+		    $id_cliente                   = $this->input->post("id_cliente");
+			$id_producto                  = $this->input->post("id_producto");
+			$id_vendedor                  = $this->input->post("id_vendedor");
+
+			$cantidad_comprado_producto   = $this->input->post("cantidad_comprado_producto");
+			$precio_producto              = $this->input->post("precio_producto");
+			$comentario_venta             = $this->input->post("comentario_venta");
+
+			$codigo_compra                = time();
+			$descuento_compra             = $this->input->post("descuento_compra");
+			$fecha_compra                 = date('Y-m-d');
+						
+
+			for ($i=0; $i < count($id_producto); $i++) {
+				$data = array
+								(
+									'id_cliente'                  => trim($id_cliente),
+									'id_producto'                 => trim($id_producto[$i]),
+									'id_vendedor'                 => trim($id_vendedor),
+									'cantidad_comprado_producto'  => trim($cantidad_comprado_producto[$i]),
+									'precio_producto'             => trim($precio_producto[$i]),
+									'comentario_venta'            => trim($comentario_venta[$i]),
+									'codigo_compra'               => trim($codigo_compra),
+									'descuento_compra'            => trim($descuento_compra),
+									'fecha_compra'                => trim($fecha_compra),
+											
+							
+								);	
+						$this->Ventas_model->agregar_venta_contado($data);	
+			}
+
 			
 
 
-
-			$data = array
-					(
-						'nombre_vendedor'      => trim($nombre_vendedor),
-						'dni_vendedor'         => trim($dni_vendedor),
-						'correo_vendedor'      => trim($correo_vendedor),
-								
-				
-					);	
-			$this->Ventas_model->agregar_vendedor($data);	
 			
 	}
 
-	public function vista_edicion($id_vendedor)
+/*	public function vista_edicion($id_vendedor)
 	{
 		$data  = array(
 				'vendedor'   => $this->Ventas_model->seleccionar_vendedor($id_vendedor), 
