@@ -139,61 +139,11 @@ public function venta_contado()
 			
 	}
 
-/*	public function vista_edicion($id_vendedor)
-	{
-		$data  = array(
-				'vendedor'   => $this->Ventas_model->seleccionar_vendedor($id_vendedor), 
-			);
 
-		$this->load->view("vendedores/respuesta_modal_editar.php",$data);
-		
-	}	
 
-	public function editar()
-	{
-			$id_vendedor            = $this->input->post("id_vendedor");
-			$nombre_vendedor        = $this->input->post("nombre_vendedor");
-			$dni_vendedor           = $this->input->post("dni_vendedor");
-			$correo_vendedor        = $this->input->post("correo_vendedor");
-
-			$data = array
-					(
-						'nombre_vendedor'      => trim($nombre_vendedor),
-						'dni_vendedor'         => trim($dni_vendedor),
-						'correo_vendedor'      => trim($correo_vendedor),					
-					);	
-			$this->Ventas_model->actualizar_vendedor($id_vendedor,$data);	
-			
-	}
-
-	public function vista_eliminar($id_vendedor)
-	{
-		$data  = array(
-				'vendedor'   => $this->Ventas_model->seleccionar_vendedor($id_vendedor), 
-			);
-		$this->load->view("vendedores/respuesta_modal_eliminar.php",$data);
-		
-	}
-
-	public function eliminar()
-	{
-			$id_vendedor            = $this->input->post("id_vendedor");
-
-			$data = array
-					(
-						'estado'                 => '0',									
-					);	
-			$this->Ventas_model->actualizar_vendedor($id_vendedor,$data);	
-			
-	}	*/
+	
 
 /*SECCION DE VENTAS NORMALES*/
-
-
-
-
-
-
 
 
 

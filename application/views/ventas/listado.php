@@ -38,7 +38,7 @@
                                          <td><?php echo $venta_contado->codigo_compra;?></td>
                                          <td><?php echo $venta_contado->fecha_compra;?></td>                    
                                          <td>
-                                          <button title="Informaci&oacute;n de la Venta" type="button" class="btn btn-primary boton_informacion_productos" value="<?php echo $venta_contado->id_venta_contado; ?>" data-toggle="modal" data-target="#modal_informacion">
+                                          <button title="Informaci&oacute;n de la Venta" type="button" class="btn btn-primary boton_informacion_venta" value="<?php echo $venta_contado->codigo_compra; ?>" data-toggle="modal" data-target="#modal_informacion">
                                                         <span class="fa fa-eye"></span>
                                         </button>  
                                                                             

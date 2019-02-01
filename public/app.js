@@ -866,7 +866,7 @@ $("#formulario_eliminar_productos").submit(function(e){
 /*SECCION PRODUCTOS*/
 
 
-/*SECCION VENTAS DE CONTADO*/
+/*******************************SECCION VENTAS DE CONTADO*****************************************/
 
 $(document).ready(function() {
  
@@ -1016,9 +1016,9 @@ $('#addon_cantidad').click(function(e){
    }
 
 var precio_unitario = parseFloat(infoproducto[0]);
-var inpuesto_agregado = parseFloat(infoproducto[1]);
+var impuesto_agregado = parseFloat(infoproducto[1]);
 var cantidad_comprada_numero = Number(cantidad_comprado_producto); 
-var total_sin_descuento = (precio_unitario*cantidad_comprada_numero)+((precio_unitario*cantidad_comprada_numero)*(inpuesto_agregado/100));
+var total_sin_descuento = (precio_unitario*cantidad_comprada_numero)+((precio_unitario*cantidad_comprada_numero)*(impuesto_agregado/100));
 var plantilla_tabla = `
 <tr>
 <td>
@@ -1038,9 +1038,9 @@ var plantilla_tabla = `
 <p class="text-danger">${comentario_venta}</p>
 </td>
 
-<td><input class='input_venta' readonly name='precio_producto[]' value='${precio_unitario}'></input></td>
-<td><input class='input_venta' readonly value='${inpuesto_agregado}'></input></td>
-<td><input class='input_venta' type='hidden' value='${total_sin_descuento}'></input><p>${total_sin_descuento}</p></td>
+<td><input class='input_venta' readonly  value='${precio_unitario}'></input></td>
+<td><input class='input_venta' readonly value='${impuesto_agregado}'></input></td>
+<td><input class='input_venta' type='hidden' name='precio_producto[]' value='${total_sin_descuento}'></input><p>${total_sin_descuento}</p></td>
 <td><button type='button' class='btn btn-danger btn-remove-producto btn-block'><span class='fa fa-remove'></span></button></td>
 
 </tr>
@@ -1138,10 +1138,29 @@ $("#formulario_venta_contado").submit(function(e){
   });
 
 
+$(".boton_informacion_venta").click(function(){
+    var codigo_compra    =   $(this).val();
+   $.ajax({
+            url: base_url + "ventas/vista_informacion/" + codigo_compra,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+              },
+               success:function(resp){                               
+                $("#modal_informacion .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
 
 
-
-/*SECCION VENTAS DE CONTADO*/
+/*******************************SECCION VENTAS DE CONTADO*****************************************/
 
 
 
