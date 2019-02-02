@@ -156,84 +156,64 @@ public function vista_informacion($codigo_compra){
 
 
 /*SECCION DE VENTAS A CREDITO*/
-public function listado_credito()
-	{
+public function listadocredito()
+{
 		 $data = array(
-     		 'vendedores' => $this->Ventas_model->listado(),
+     		 'ventas_credito' => $this->Ventas_model->listado_credito(),
     );
 
-		$this->layout->view("listado",$data);
+		$this->layout->view("listado_credito",$data);
 
-	}	
+}	
 
-	public function registrar_credito()
+public function venta_credito()
 	{
-		    $nombre_vendedor        = $this->input->post("nombre_vendedor");
-			$dni_vendedor           = $this->input->post("dni_vendedor");
-			$correo_vendedor        = $this->input->post("correo_vendedor");
+		    $id_cliente                   = $this->input->post("id_cliente");
+			$id_producto                  = $this->input->post("id_producto");
+			$id_vendedor                  = $this->input->post("id_vendedor");
+
+			$cantidad_comprado_producto   = $this->input->post("cantidad_comprado_producto");
+			$precio_producto              = $this->input->post("precio_producto");
+			$comentario_venta             = $this->input->post("comentario_venta");
+
+			$codigo_compra                = time();
+			$descuento_compra             = $this->input->post("descuento_compra");
+			$fecha_compra                 = date('Y-m-d');
+						
+
+			for ($i=0; $i < count($id_producto); $i++) {
+				$data = array
+								(
+									'id_cliente'                  => trim($id_cliente),
+									'id_producto'                 => trim($id_producto[$i]),
+									'id_vendedor'                 => trim($id_vendedor),
+									'cantidad_comprado_producto'  => trim($cantidad_comprado_producto[$i]),
+									'precio_producto'             => trim($precio_producto[$i]),
+									'comentario_venta'            => trim($comentario_venta[$i]),
+									'codigo_compra'               => trim($codigo_compra),
+									'descuento_compra'            => trim($descuento_compra),
+									'fecha_compra'                => trim($fecha_compra),
+											
+							
+								);	
+						$this->Ventas_model->agregar_venta_credito($data);	
+			}
+
 			
 
 
+			
+	}
 
-			$data = array
-					(
-						'nombre_vendedor'      => trim($nombre_vendedor),
-						'dni_vendedor'         => trim($dni_vendedor),
-						'correo_vendedor'      => trim($correo_vendedor),
-								
+public function vista_informacion_credito($codigo_compra){			
+
+		 /*   $data  = array(
+				'ventas'       => $this->Ventas_model->informacion_venta($codigo_compra),
 				
-					);	
-			$this->Ventas_model->agregar_vendedor($data);	
-			
-	}
+			);*/
 
-	public function vista_edicion_credito($id_vendedor)
-	{
-		$data  = array(
-				'vendedor'   => $this->Ventas_model->seleccionar_vendedor($id_vendedor), 
-			);
-
-		$this->load->view("vendedores/respuesta_modal_editar.php",$data);
-		
-	}	
-
-	public function editar_credito()
-	{
-			$id_vendedor            = $this->input->post("id_vendedor");
-			$nombre_vendedor        = $this->input->post("nombre_vendedor");
-			$dni_vendedor           = $this->input->post("dni_vendedor");
-			$correo_vendedor        = $this->input->post("correo_vendedor");
-
-			$data = array
-					(
-						'nombre_vendedor'      => trim($nombre_vendedor),
-						'dni_vendedor'         => trim($dni_vendedor),
-						'correo_vendedor'      => trim($correo_vendedor),					
-					);	
-			$this->Ventas_model->actualizar_vendedor($id_vendedor,$data);	
-			
-	}
-
-	public function vista_eliminar_credito($id_vendedor)
-	{
-		$data  = array(
-				'vendedor'   => $this->Ventas_model->seleccionar_vendedor($id_vendedor), 
-			);
-		$this->load->view("vendedores/respuesta_modal_eliminar.php",$data);
-		
-	}
-
-	public function eliminar_credito()
-	{
-			$id_vendedor            = $this->input->post("id_vendedor");
-
-			$data = array
-					(
-						'estado'                 => '0',									
-					);	
-			$this->Ventas_model->actualizar_vendedor($id_vendedor,$data);	
-			
-	}	
+		$this->load->view("ventas/respuesta_modal_informacion_credito"/*,$data*/);
+	}			
 
 /*SECCION DE VENTAS A CREDITO*/
 

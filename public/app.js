@@ -1163,9 +1163,67 @@ $(".boton_informacion_venta").click(function(){
 /*******************************SECCION VENTAS DE CONTADO*****************************************/
 
 
+/*SECCION VENTAS DE CREDITO*/
+$("#formulario_venta_credito").submit(function(e){
+    e.preventDefault();
 
+    var venta = {
+      id_cliente:                          $('input[name="id_cliente"]').val(),
+      id_producto:                         $('input[name="id_producto[]"]').map(function(){return $(this).val();}).get(),
+      id_vendedor:                         $('input[name="id_vendedor"]').val(),
+      cantidad_comprado_producto:          $('input[name="cantidad_comprado_producto[]"]').map(function(){return $(this).val();}).get(),
+      precio_producto:                     $('input[name="precio_producto[]"]').map(function(){return $(this).val();}).get(),
+      comentario_venta:                    $('input[name="comentario_venta[]"]').map(function(){return $(this).val();}).get(),
+      descuento_compra:                    $('input[name="descuento_compra"]').val(),         
+    };  
+  
 
+   $.ajax({
+            url: base_url + "ventas/venta_credito",
+            type:"POST",
+            data: venta,
+            beforeSend: function() {
+                     toastr.warning('Realizando Venta Espere...');
+                     toastr.clear()
+              },
+               success:function(resp){    
+                toastr.success('Venta Realizada!!!!', 'Venta');
+                $("#modal_agregar").hide('explode',{pieces: 4}, 1000); 
+                setTimeout(function(){
+                   location.reload(); 
+                 }, 2000);
 
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+    return false;
+  });
+
+$(".boton_informacion_venta_credito").click(function(){
+    var id_venta_credito    =   $(this).val();
+   $.ajax({
+            url: base_url + "ventas/vista_informacion_credito/" + id_venta_credito,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+              },
+               success:function(resp){                               
+                $("#modal_informacion .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+  });
+/*SECCION VENTAS DE CREDITO*/
 
 
 
