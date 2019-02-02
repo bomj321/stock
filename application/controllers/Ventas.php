@@ -205,14 +205,14 @@ public function venta_credito()
 			
 	}
 
-public function vista_informacion_credito($codigo_compra){			
+public function vista_informacion_credito($id_cliente){			
 
-		 /*   $data  = array(
-				'ventas'       => $this->Ventas_model->informacion_venta($codigo_compra),
+		    $data  = array(
+				'ventas'       => $this->Ventas_model->informacion_venta_credito($id_cliente),
 				
-			);*/
+			);
 
-		$this->load->view("ventas/respuesta_modal_informacion_credito"/*,$data*/);
+		$this->load->view("ventas/respuesta_modal_informacion_credito",$data);
 	}			
 
 /*SECCION DE VENTAS A CREDITO*/

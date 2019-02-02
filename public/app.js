@@ -1204,9 +1204,9 @@ $("#formulario_venta_credito").submit(function(e){
   });
 
 $(".boton_informacion_venta_credito").click(function(){
-    var id_venta_credito    =   $(this).val();
+    var id_cliente    =   $(this).val();
    $.ajax({
-            url: base_url + "ventas/vista_informacion_credito/" + id_venta_credito,
+            url: base_url + "ventas/vista_informacion_credito/" + id_cliente,
             type:"GET",
             beforeSend: function() {
                      toastr.warning('Espere Cargando Información...');

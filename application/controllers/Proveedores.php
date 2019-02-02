@@ -48,7 +48,8 @@ class Proveedores extends CI_Controller {
 						'numero_proveedor'      => trim($numero_proveedor),
 						'numero_fax '           => trim($numero_fax),	
 						'numero_ruc '           => trim($numero_ruc),	
-						'web_proveedor '        => trim($web_proveedor)				
+						'web_proveedor '        => trim($web_proveedor),
+						'estado '               => '1'				
 				
 					);	
 			$this->Proveedores_model->agregar_proveedor($data);	

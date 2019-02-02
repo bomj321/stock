@@ -34,7 +34,7 @@ class Vendedores extends CI_Controller {
 						'nombre_vendedor'      => trim($nombre_vendedor),
 						'dni_vendedor'         => trim($dni_vendedor),
 						'correo_vendedor'      => trim($correo_vendedor),
-								
+						'estado'               => '1'								
 				
 					);	
 			$this->Vendedores_model->agregar_vendedor($data);	

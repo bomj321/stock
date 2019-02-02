@@ -51,7 +51,8 @@ class Productos extends CI_Controller {
 						'subdescripcion_categoria ' => trim($subdescripcion_categoria),	
 						'codigo_bodega '            => trim($codigo_bodega),	
 						'descripcion_bodega '       => trim($descripcion_bodega),	
-						'codigo_fabricante '        => trim($codigo_fabricante)			
+						'codigo_fabricante '        => trim($codigo_fabricante),
+						'estado '                   => '1' 			
 				
 					);
 

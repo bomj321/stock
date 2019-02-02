@@ -44,7 +44,7 @@
                                          <td><?php echo $venta_credito->dni_cliente;?></td>
                                          <td><?php echo $venta_credito->nombre_vendedor;?></td>
                                          <td>
-                                          <button title="Informaci&oacute;n de la Venta" type="button" class="btn btn-primary boton_informacion_venta_credito" value="<?php echo $venta_credito->id_venta_credito; ?>" data-toggle="modal" data-target="#modal_informacion">
+                                          <button title="Informaci&oacute;n de la Venta" type="button" class="btn btn-primary boton_informacion_venta_credito" value="<?php echo $venta_credito->id_cliente; ?>" data-toggle="modal" data-target="#modal_informacion">
                                                         <span class="fa fa-eye"></span>
                                         </button>  
                                                                             
