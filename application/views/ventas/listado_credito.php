@@ -66,6 +66,7 @@
 <!--Modales-->
 <?php require_once ('modal_agregar_credito.php') ?>
 <?php require_once ('modal_informacion.php') ?>
+<?php require_once ('modal_abono.php') ?>
 
 <!--Modales-->
 

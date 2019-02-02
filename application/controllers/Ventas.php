@@ -205,7 +205,7 @@ public function venta_credito()
 			
 	}
 
-public function vista_informacion_credito($id_cliente){			
+	public function vista_informacion_credito($id_cliente){			
 
 		    $data  = array(
 				'ventas'       => $this->Ventas_model->informacion_venta_credito($id_cliente),
@@ -213,7 +213,38 @@ public function vista_informacion_credito($id_cliente){
 			);
 
 		$this->load->view("ventas/respuesta_modal_informacion_credito",$data);
+	}	
+
+	public function vista_abono(){	
+
+			 $id_cliente                   = $this->input->post("id_cliente");	
+
+			    $data  = array(
+					'id_cliente'       => $id_cliente,
+					
+				);
+
+		$this->load->view("ventas/respuesta_modal_abono",$data);
 	}			
+
+
+	public function agregar_abono()
+	{
+		    $abono_id_cliente        = $this->input->post("abono_id_cliente");
+			$abono_cantidad          = $this->input->post("abono_cantidad");		
+
+
+
+			$data = array
+					(
+						'id_cliente'   => trim($abono_id_cliente),
+						'total_abono'  => trim($abono_cantidad),
+						'fecha_abono'  => date('Y-m-d'),
+						
+					);	
+			$this->Ventas_model->agregar_abono($data);	
+			
+	}
 
 /*SECCION DE VENTAS A CREDITO*/
 

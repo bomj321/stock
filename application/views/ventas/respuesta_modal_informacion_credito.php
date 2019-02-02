@@ -41,21 +41,46 @@
 
 			<h2><strong>Total del Credito: <?php echo number_format($total_credito, 3, '.', ''); ?> Soles</strong></h2>
 			<!--ABONOS-->
-						<?php if (!empty($venta->total_abono)): ?>
+
+			<?php 
+				$this->db->where("id_cliente",$venta->id_cliente);
+				$resultados_abonos = $this->db->get('abonos');
+			    $abonos_existentes = $resultados_abonos->result();
+				$abonos_totales = 0;
+			 ?>
+
+
+<?php if (!empty($abonos_existentes)): ?>			
+			<h4 class="text-danger"><strong>Abonos Realizados</strong></h4>
+			<?php foreach ($abonos_existentes as $abono_existente): ?>
+				<?php $abonos_totales +=  $abono_existente->total_abono ?>
+				<h5><strong><?php echo $abono_existente->fecha_abono ?> / <?php echo $abono_existente->total_abono.' Soles' ?> </strong></h5>	
+			<?php endforeach ?>
+
+			<h2 class="text-danger"><strong>Total de los Abonos: <?php echo number_format($abonos_totales, 3, '.', ''); ?> Soles</strong> </h2>
+			<h2 class="text-success"><strong>Total Restante: <?php echo number_format($total_credito - $abonos_totales, 3, '.', ''); ?> Soles</strong></h2>
+
+	<?php else: ?>
+
+		<h2 class="text-danger"><strong>No hay Abonos</strong> </h2>
+
+<?php endif ?>
+
+						<!--<?php if (!empty($venta->total_abono)): ?>
 								<?php $abono = $venta->total_abono; ?>
 								<h2 class="text-danger"><strong>Total de los Abonos: <?php echo number_format($abono, 3, '.', ''); ?> Soles</strong> </h2>
 							<?php else: ?>
 									<?php $abono = 0; ?>
 								<h2 class="text-danger"><strong>No hay Abonos</strong> </h2>
-						<?php endif ?>
+						<?php endif ?>-->
 			<!--ABONOS-->			
-			<h2 class="text-success"><strong>Total Restante: <?php echo number_format($total_credito-$abono, 3, '.', ''); ?> Soles</strong></h2>	 
+			<!--<h2 class="text-success"><strong>Total Restante: <?php echo number_format($total_credito - $abono, 3, '.', ''); ?> Soles</strong></h2>	 -->
 </div>
 
 
 	</div>
 
 	<div class="col-md-4">
-		<button class="btn btn-success"> Agregar Abono</button>
+		<button class="btn btn-success"  data-toggle="modal" data-target="#modal_abono"  onclick="abono_agregar(<?php echo $venta->id_cliente; ?>)"> Agregar Abono</button>
 	</div>
 </div>

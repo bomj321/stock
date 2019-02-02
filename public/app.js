@@ -1223,6 +1223,111 @@ $(".boton_informacion_venta_credito").click(function(){
       });
 
   });
+
+
+/****************ABONO**********************/
+
+function abono_agregar($id_cliente){
+
+    var abono_agregar = {
+      id_cliente:                          $id_cliente    
+    };  
+
+
+   $.ajax({
+            url: base_url + "ventas/vista_abono",
+            type:"POST",
+             data: abono_agregar,
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+              },
+               success:function(resp){                               
+                $("#modal_abono .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+}
+
+function AgregarAbono(){
+ 
+ var abono_id_cliente =  $("#abono_id_cliente").val();
+ var abono_cantidad   =  Number($("#abono_cantidad").val());
+
+
+ if(abono_cantidad == ''){
+      toastr.warning('Ingrese una Cantidad');
+      return false
+  }
+
+  if(isNaN(abono_cantidad)){
+      toastr.warning('Ingrese una cantidad Valida');
+      return false
+  }
+
+  if(abono_cantidad < 0){
+      toastr.warning('Ingrese una cantidad Valida');
+      return false
+  }
+
+
+  var datos_abono = {
+      abono_id_cliente:  abono_id_cliente,
+      abono_cantidad:   abono_cantidad
+    }; 
+
+     $.ajax({
+            url: base_url + "ventas/agregar_abono",
+            type:"POST",
+             data: datos_abono,
+            beforeSend: function() {
+                     toastr.warning('Espere Guardando Información...');
+                     toastr.clear()
+              },
+               success:function(resp){                               
+                 toastr.success('Abono Realizado!!!!', 'Abono');
+                 $('#modal_abono').modal('hide');
+                  modalAgregar(abono_id_cliente);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+}
+
+function modalAgregar($id_cliente){
+
+    var id_cliente    =   $id_cliente;
+   $.ajax({
+            url: base_url + "ventas/vista_informacion_credito/" + id_cliente,
+            type:"GET",
+            beforeSend: function() {
+                     toastr.warning('Espere Cargando Información...');
+                     toastr.clear()
+              },
+               success:function(resp){                               
+                $("#modal_informacion .modal-body").html(resp);
+
+            },
+            error:function(){
+             toastr.error('Ha ocurrido un error, intente más tarde.', 'Disculpenos!') 
+            }
+
+      });
+
+
+}
+
+/****************ABONO**********************/
+
 /*SECCION VENTAS DE CREDITO*/
 
 
