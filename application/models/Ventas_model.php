@@ -22,7 +22,7 @@ public function informacion_venta($codigo_compra)
 	$this->db->select('vc.*,productos.codigo_producto as codigo_producto,productos.descripcion_producto as descripcion_producto,productos.precio_producto as precio_producto,productos.impuesto_producto as impuesto_producto');
 	$this->db->from('ventas_contado vc');
 	$this->db->join('productos productos','vc.id_producto = productos.id_producto');
-    $this->db->where("codigo_compra",$codigo_compra);
+    $this->db->where("vc.codigo_compra",$codigo_compra);
 	$resultados = $this->db->get();
 	return $resultados->result();
 }

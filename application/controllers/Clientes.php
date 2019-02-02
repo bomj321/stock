@@ -36,7 +36,8 @@ class Clientes extends CI_Controller {
 						'dni_cliente'            => trim($dni_cliente),
 						'direccion_cliente'      => trim($direccion_cliente),
 						'correo_cliente '        => trim($correo_cliente),	
-						'codigo_cliente '        => trim($codigo_cliente),					
+						'codigo_cliente '        => trim($codigo_cliente),
+						'estado '                => '1',					
 					);	
 			$this->Usuarios_model->agregar_cliente($data);	
 			
